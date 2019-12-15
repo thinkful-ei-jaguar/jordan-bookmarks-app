@@ -1,0 +1,45 @@
+<!-- Initial view is index.html -->
+
+<!-- Form to add new bookmark - when click to add new -->
+<section class="add-container">
+  <form>
+    <h2>Create new bookmark:</h2>
+    <div class="cancel-add">Cancel</div>  <!-- X icon to cancel new input and go back to inital view -->
+    <label for="bookmark-title">Title
+      <input type="text" id="bookmark-title" name="title" class="bookmark-title-input" required>
+    </label>
+    <label for="url">Url
+      <input type="text" id="url" name="url" required>
+    </label>
+    <label for="description">Bookmark Description
+      <input type="text" id="description" name="description">
+    </label>
+    <div class="stars-picker">
+      <span name="star" id="star1" class="star"></span>
+      <span name="star" id="star2" class="star"></span>
+      <span name="star" id="star3" class="star"></span>
+      <span name="star" id="star4" class="star"></span>
+      <span name="star" id="star5" class="star"></span>
+    </div>
+    <button type="button" class="save-button">Save</button>
+  </form>
+</section>
+
+<!-- CONDENSED VIEW - Bookmark Item -->
+<li class="bookmark-item-element" data-item-id="${bookmark.id}">
+  <div class="item-condensed">
+    <p class="title">${bookmarks.name}</p>
+    <p class="rating">${bookmarks.rating}</p>
+  </div>
+</li>
+
+<!-- EXPANDED VIEW - Bookmark Item -->
+<li class="bookmark-item-element" data-item-id="${bookmark.id}">
+  <div class="item-expanded">
+    <p class="title">${bookmarks.title}</p>
+    <p class="url-visit"><a href="${bookmarks.url}">Visit Site</a></p>
+    <p class="item-description">${bookmarks.description}</p>
+    <div class="rating-given">${bookmarks.rating}</div>
+    <button type="button" class="delete-button">Delete Bookmark</button>
+  </div>
+</li>
