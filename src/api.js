@@ -1,20 +1,21 @@
 //import statements 
 
-const BASE_URL = 'https://thinkful-list-api.herokuapp.com/Jordan/bookmarks';
+const BASE_URL = 'https://thinkful-list-api.herokuapp.com/jordan/bookmarks';
 
 //1. GET the api server state
 //2. POST new bookmarks to the server
 //3.UPDATE(PATCH) existing bookmarks in the server
 //4.DELETE items in the sever
 
-//getItems will GET the api server state (api store)
+//getItems will GET the api server state (api store) - WORKING!
 const getItems = function(){
   return fetch(`${BASE_URL}`);
 };
 
-//createItem will add a new bookmark
-const createItem = function(name){
-  let newBookmark = JSON.stringify({name});
+//createItem will add a new bookmark - WORKING!!
+const createItem = function(bookmarkItem){
+  let newBookmark = JSON.stringify(bookmarkItem);
+  console.log(newBookmark);
   return fetch(`${BASE_URL}`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -22,9 +23,11 @@ const createItem = function(name){
   });
 };
 
-//updateItem will 'patch' and existing bookmark
+//updateItem will 'patch' and update an existing bookmark
 const updateItem = function(id, updateData){
   let updateDataStr = JSON.stringify(updateData);
+  console.log(updateDataStr);
+  
   return fetch(`${BASE_URL}/${id}`, {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
