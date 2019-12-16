@@ -8,7 +8,7 @@ const generateItemElement = function(bookmark){
     return `
     <li class="bookmark-item-element" data-item-id="${bookmark.id}">
       <div class="item-condensed">
-        <p class="title">${bookmark.name}</p>
+        <p class="title">${bookmark.title}</p>
         <p class="rating">${bookmark.rating}</p>
       </div>
     </li>`;
@@ -38,14 +38,13 @@ const generateAddForm = function(){
   <section class="add-container">
   <form>
     <h2>Create new bookmark:</h2>
-    <div class="cancel-add">Cancel</div>
-    <label for="bookmark-title">Title
+    <label for="bookmark-title" class="add-label">Title
       <input type="text" id="bookmark-title" name="title" class="bookmark-title-input" required>
     </label>
-    <label for="url">Url
+    <label for="url" class="add-label">Url
       <input type="text" id="url" name="url" required>
     </label>
-    <label for="description">Bookmark Description
+    <label for="description" class="add-label">Bookmark Description
       <input type="text" id="description" name="description">
     </label>
     <div class="stars-picker">
@@ -55,7 +54,10 @@ const generateAddForm = function(){
       <span name="star" id="star4" class="star"></span>
       <span name="star" id="star5" class="star"></span>
     </div>
-    <button type="button" class="save-button">Save</button>
+    <div class="cancel-add">
+      <button type="button" class="cancel-button">Cancel</button>
+      <button type="button" class="save-button">Save</button>
+    </div>
   </form>
   </section>`;
 

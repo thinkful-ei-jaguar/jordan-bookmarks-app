@@ -5,7 +5,7 @@
   <form>
     <h2>Create new bookmark:</h2>
     <div class="cancel-add">Cancel</div>  <!-- X icon to cancel new input and go back to inital view -->
-    <label for="bookmark-title">Title
+    <label for="bookmark-title" >Title
       <input type="text" id="bookmark-title" name="title" class="bookmark-title-input" required>
     </label>
     <label for="url">Url
@@ -26,9 +26,9 @@
 </section>
 
 <!-- CONDENSED VIEW - Bookmark Item -->
-<li class="bookmark-item-element" data-item-id="${bookmark.id}">
+<li class="bookmark-item-element" data-item-id="${bookmarks.id}">
   <div class="item-condensed">
-    <p class="title">${bookmarks.name}</p>
+    <p class="title">${bookmarks.title}</p>
     <p class="rating">${bookmarks.rating}</p>
   </div>
 </li>
