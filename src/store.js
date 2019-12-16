@@ -5,7 +5,7 @@ const bookmarks = [
     rating: 3,
     url: 'http://www.title1.com',
     description: 'lorem ipsum dolor sit',
-    expanded: false
+    expanded: true
   },
 ];
 let adding = false;
@@ -23,7 +23,6 @@ const findById = function(id){
 const findAndUpdate = function(id, newData) {
   const currentItem = this.findById(id);
   const newObject = Object.assign(currentItem, newData);
-  return newObject;
 };
 
 export default {

@@ -8,15 +8,15 @@ const generateItemElement = function(bookmark){
   if(!bookmark.expanded) { 
     return `
     <li class="bookmark-item-element" data-item-id="${bookmark.id}">
-      <div class="item-condensed item-element">
+      <div class="item-element">
         <p class="title">${bookmark.title}</p>
         <p class="rating">${bookmark.rating}</p>
       </div>
     </li>`;
   } else {
     return `
-    <li class="bookmark-item-element" data-item-id="${bookmark.id}">
-      <div class="item-expanded item-element">
+    <li class="bookmark-item-element expanded" data-item-id="${bookmark.id}">
+      <div class="item-element">
         <p class="title">${bookmark.title}</p>
         <p class="url-visit"><a href="${bookmark.url}">Visit Site</a></p>
         <p class="item-description">${bookmark.description}</p>
@@ -92,29 +92,29 @@ const handleNewItemSave = function(){
       url: newUrl,
       //hardcoded rating before I get 
       rating: 5,
-      desc: newDescription
+      desc: newDescription,
+      expanded: false
     };
 
     api.createItem(newBookmarkEntry)
       .then(res => res.json())
       .then((newItem) => {
         store.addItem(newItem);
+        store.adding = false;
         render();
       });
   });
 };
 
 //this function will toggle the 'expanded' property for an item when clicked on 
-const handleItemClick = function(){
+const handleExistingItemClick = function(){
   $('.existing-bookmarks').on('click', '.item-element', function(){
-    store.adding = false;
     const id = getId(event.target);
-    api.updateItem(id, {expanded: true})
-      .then(res => res.json())
-      .then((updatedItem) => {
-        store.findAndUpdate(id, updatedItem);
-        render();
-      });
+    const currentItem = store.findById(id);
+    
+    const expanded = !currentItem.expanded; store.findAndUpdate(id, {expanded});
+    
+    render();
   });
 };
 
@@ -123,6 +123,22 @@ const getId = function(item){
   return $(item)
     .closest('.bookmark-item-element')
     .data('item-id');
+};
+
+//this function will handle user clicking on the edit button
+const handleEditClick = function(){
+$().on('click', '', function(){
+    editExistingItem();
+  });
+};
+//this function will make the api call to update item after editting it
+const editExistingItem = function(){
+  // api.updateItem(id, {expanded: true})
+  //   .then(res => res.json())
+  //   .then((updatedItem) => {
+  //     store.findAndUpdate(id, updatedItem);
+  //     render();
+  //   });
 };
 
 //rendering function
@@ -139,7 +155,8 @@ const render = function(){
 const eventListeners = function(){
   handleNewClick();
   handleNewItemSave();
-  handleItemClick();
+  handleExistingItemClick();
+  handleEditClick();
 };
 
 export default {
