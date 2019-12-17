@@ -24,11 +24,16 @@ const findAndDelete = function (id) {
 
 const apiGetItems =function(){
   api.getItems()
-    .then(res => res.json())
+    // .then(res => res.json())
     .then((items)=> {
       items.forEach((item) => bookmarks.push(item));
       bookmarkApp.render();
     });
+};
+
+//function to set error variable to an error if one exists 
+const setError = function(error){
+  this.error = error;
 };
 
 // const filterItems = function(minRating){
@@ -51,6 +56,6 @@ export default {
   findById,
   findAndUpdate,
   findAndDelete,
-  // filterItems,
+  setError,
   apiGetItems
 };

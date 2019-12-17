@@ -9,8 +9,7 @@ import './index.css';
 import bookmarkApp from './bookmark-app.js';
 
 const main = function(){
-  store.apiGetItems();
-
+  store.apiGetItems();  
   // bookmarkApp.render();
   bookmarkApp.eventListeners();
 };

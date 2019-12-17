@@ -26,7 +26,7 @@ const generateModifyString = function(){
 
 //this function will generate the bookmark element
 const generateItemElement = function(bookmark){
-  console.log(bookmark.rating, store.filter, bookmark.rating >= store.filter);
+  //console.log(bookmark.rating, store.filter, bookmark.rating >= store.filter);
   if(bookmark.rating >= store.filter){
     if(!bookmark.expanded) { 
       return `
@@ -123,22 +123,36 @@ const handleNewItemSave = function(){
     };
 
     api.createItem(newBookmarkEntry)
-      .then(res => res.json())
+      // .then(res => res.json())
       .then((newItem) => {
         store.bookmarks.push(newItem);
         store.adding = false;
         render();
+      })
+      .catch((error) => {
+        store.setError(error.message);
+        render();
       });
   });
 };
+
+//this function will handle when the user clicks on the cancel button when adding a form 
+const handleCancelFormClick = function(){
+  $('main').on('click','.cancel-button', function (){
+    store.adding = false;
+    render();
+  });
+};
+
 
 //this function will toggle the 'expanded' property for an item when clicked on 
 const handleExistingItemClick = function(){
   $('main').on('click', '.title', function(){
     const id = getId(event.target);
     const currentItem = store.findById(id);
-    
-    const expanded = !currentItem.expanded; store.findAndUpdate(id, {expanded});
+  
+    const expanded = !currentItem.expanded; 
+    store.findAndUpdate(id, {expanded});
     
     render();
   });
@@ -153,14 +167,16 @@ const getId = function(item){
 
 //this function will handle when user clicks to delete an existing bookmark
 const handleDeleteClick = function(){
-$('main').on('click', '.delete-button', function(){
-    console.log(event.target);
-    
+  $('main').on('click', '.delete-button', function(){
     const id = getId(event.target);
     api.deleteItem(id)
-      .then(res => res.json())
+      // .then(res => res.json())
       .then((item) => {
         store.findAndDelete(id);
+        render();
+      })
+      .catch((error) => {
+        store.setError(error.message);
         render();
       });
   });
@@ -169,7 +185,7 @@ $('main').on('click', '.delete-button', function(){
 //function will watch for filter selection to change
 const handleFilterSelection = function(){
   $('main').on('change', '.filter-dropdown', function() {
-    console.log('handleFilterSelection is firing');
+    //console.log('handleFilterSelection is firing');
     let currentFilter = $(event.target).val();
     // store.filterItems(currentFilter);
     store.filter = Number(currentFilter);
@@ -180,7 +196,7 @@ const handleFilterSelection = function(){
 
 //this function will handle user clicking on the edit button
 const handleEditClick = function(){
-$().on('click', '', function(){
+  $().on('click', '', function(){
     editExistingItem();
   });
 };
@@ -195,11 +211,36 @@ const editExistingItem = function(){
   //   });
 };
 
+//will generate the html for an error message to be displayed 
+const generateError = function(message){
+  return `
+    <section class="error-container">
+      <button id="cancel-error">X</button>
+      <p>${message}</p>
+    </section>
+  `;
+};
+
+//will handle closing the error message 
+const handleErrorClose = function(){
+  $('.error-container').on('click', '.cancel-error', function(){
+    store.setError(null);
+    render();
+  });
+};
+
+
 //rendering function
 const render = function(){
-  console.log('render function is firing!');
   if (store.adding) {
     return generateAddForm();
+  }
+
+  if (store.error){
+    const err = generateError(store.error);
+    $('.error-container').html(err);
+  } else {
+    $('.error-container').empty();
   }
 
   let bookmarkExist = store.bookmarks;
@@ -214,6 +255,8 @@ const eventListeners = function(){
   handleDeleteClick();
   handleEditClick();
   handleFilterSelection();
+  handleCancelFormClick();
+  handleErrorClose();
 };
 
 export default {
