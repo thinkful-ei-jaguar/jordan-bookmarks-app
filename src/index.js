@@ -14,8 +14,10 @@ const main = function(){
     .then((items)=> {
       items.forEach((item) => store.addItem(item));
       bookmarkApp.render();
+
     });
   bookmarkApp.eventListeners();
   bookmarkApp.render();
+
 };
 $(main);

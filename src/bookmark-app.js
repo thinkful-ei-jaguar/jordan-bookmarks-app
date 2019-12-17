@@ -3,6 +3,27 @@ import $ from 'jquery';
 import store from './store.js';
 import api from './api.js';
 
+const generateModifyString = function(){
+  return `
+  <section class="modify">
+    <button class="add-new">New Bookmark</button>
+    <div class="filter-container">
+      <label for="filter" class="filter">Filter
+        <select class="filter-dropdown" name="filter" id="filter" onchange="">
+          <option value="5">5 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="2">2 Stars</option>
+          <option value="1">1 Star</option>
+        </select>
+      </label>
+    </div>
+  </section>
+  <ul class="item-view existing-bookmarks">
+  </ul>
+  `;
+};
+
 //this function will generate the bookmark element
 const generateItemElement = function(bookmark){
   if(!bookmark.expanded) { 
@@ -18,8 +39,8 @@ const generateItemElement = function(bookmark){
     <li class="bookmark-item-element expanded" data-item-id="${bookmark.id}">
       <div class="item-element">
         <p class="title">${bookmark.title}</p>
-        <p class="url-visit"><a href="${bookmark.url}">Visit Site</a></p>
-        <p class="item-description">${bookmark.description}</p>
+        <p class="url-visit"><a href="${bookmark.url}" target="_blank">Visit Site</a></p>
+        <p class="item-description">${bookmark.desc}</p>
         <div class="rating-given">${bookmark.rating}</div>
         <button type="button" class="delete-button">Delete Bookmark</button>
       </div>
@@ -30,7 +51,8 @@ const generateItemElement = function(bookmark){
 //this functio will join all generated html portions to render the whole list of exisiting bookmarks
 const generateItemString = function(bookmarkList){
   const bookmarks = bookmarkList.map((item) => generateItemElement(item));
-  return bookmarks.join('');
+  const modifySection = generateModifyString();
+  return modifySection + bookmarks.join('');
 };
 
 //this function will generate the form to add a new bookmark after clicking on the add new button 
@@ -49,12 +71,18 @@ const generateAddForm = function(){
       <input type="text" id="description" name="description" class="description-input" required>
     </label>
     <div class="stars-picker">
-      <span name="star" id="star1" class="star"></span>
-      <span name="star" id="star2" class="star"></span>
-      <span name="star" id="star3" class="star"></span>
-      <span name="star" id="star4" class="star"></span>
-      <span name="star" id="star5" class="star"></span>
-    </div>
+      <p>Rating: </p>
+      <input name="star" id="star1" type="radio" value="1"></input>
+      <label for="star1">1</label>
+      <input name="star" id="star2" type="radio" value="2"></input>
+      <label for="star2">2</label>
+      <input name="star" id="star3" type="radio" value="3"></input>
+      <label for="star3">3</label>
+      <input name="star" id="star4" type="radio" value="4"></input>
+      <label for="star4">4</label>
+      <input name="star" id="star5" type="radio" value="5"></input>
+      <label for="star5">5</label>
+  </div>
     <div class="cancel-add">
       <button type="reset" class="cancel-button">Cancel</button>
       <button type="submit" class="save-button">Save</button>
@@ -67,9 +95,8 @@ const generateAddForm = function(){
 
 //function to handle when user clicks on the add new bookmark button
 const handleNewClick = function(){
-$('.modify').on('click', '.add-new', function(event) {
+$('main').on('click', '.add-new', function(event) {
     event.preventDefault();
-    console.log('Add new bookmark clicked!');
     store.adding = true;
     render();
   });
@@ -77,23 +104,20 @@ $('.modify').on('click', '.add-new', function(event) {
 
 //this function will handle clicking the save button for submitting a new bookmark item 
 const handleNewItemSave = function(){
-  $('.modify').on('submit', '.add-new-bookmark', function(event){
+  $('main').on('submit', '.add-new-bookmark', function(event){
     event.preventDefault();
-    console.log('save add new button firing!');
     
     let newTitle = $('.bookmark-title-input').val();
     let newUrl = $('.url-input').val();
     let newDescription = $('.description-input').val();
-    // let newRating = 
+    let newRating =  $('input:radio[name=star]:checked').val();
 
 
     const newBookmarkEntry = {
       title : newTitle,
       url: newUrl,
-      //hardcoded rating before I get 
-      rating: 5,
+      rating: newRating,
       desc: newDescription,
-      expanded: false
     };
 
     api.createItem(newBookmarkEntry)
@@ -108,7 +132,7 @@ const handleNewItemSave = function(){
 
 //this function will toggle the 'expanded' property for an item when clicked on 
 const handleExistingItemClick = function(){
-  $('.existing-bookmarks').on('click', '.item-element', function(){
+  $('main').on('click', '.title', function(){
     const id = getId(event.target);
     const currentItem = store.findById(id);
     
@@ -125,12 +149,28 @@ const getId = function(item){
     .data('item-id');
 };
 
+//this function will handle when user clicks to delete an existing bookmark
+const handleDeleteClick = function(){
+$('main').on('click', '.delete-button', function(){
+    console.log(event.target);
+    
+    const id = getId(event.target);
+    api.deleteItem(id)
+      .then(res => res.json())
+      .then((item) => {
+        store.findAndDelete(id);
+        render();
+      });
+  });
+};
+
 //this function will handle user clicking on the edit button
 const handleEditClick = function(){
 $().on('click', '', function(){
     editExistingItem();
   });
 };
+
 //this function will make the api call to update item after editting it
 const editExistingItem = function(){
   // api.updateItem(id, {expanded: true})
@@ -147,15 +187,17 @@ const render = function(){
   if (store.adding) {
     return generateAddForm();
   }
+
   let bookmarkExist = store.bookmarks;
   const bookmarkString = generateItemString(bookmarkExist);
-  $('.existing-bookmarks').html(bookmarkString);
+  $('main').html(bookmarkString);
 };
 
 const eventListeners = function(){
   handleNewClick();
   handleNewItemSave();
   handleExistingItemClick();
+  handleDeleteClick();
   handleEditClick();
 };
 

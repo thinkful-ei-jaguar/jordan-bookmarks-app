@@ -43,3 +43,75 @@
     <button type="button" class="delete-button">Delete Bookmark</button>
   </div>
 </li>
+
+
+  <!-- <div class="stars-picker">
+    
+      <input name="star" id="star1" type="radio" value="1"></input>
+      <label for="star1"></label>
+    
+      <input name="star" id="star2" type="radio" value="2"></input>
+      <label for="star2"></label>
+    
+      <input name="star" id="star3" type="radio" value="3"></input>
+      <label for="star3"></label>
+    
+      <input name="star" id="star4" type="radio" value="4"></input>
+      <label for="star4"></label>
+   
+      <input name="star" id="star5" type="radio" value="5"></input>
+      <label for="star5"></label>
+  </div> -->
+
+<!-- <span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span> -->
+
+
+//CSS for star display: 
+.stars-picker {
+  display: flex;
+  transform: rotateY(180deg);
+  align-content: flex-end;
+}
+
+.stars-picker input {
+  display: none;
+}
+
+.stars-picker label {
+  display: block;
+  cursor: pointer;
+  background: white;
+}
+.stars-picker label:before {
+  content: '\f005';
+  font-family: fontAwesome;
+  display: block;
+  position: relative;
+  /* font-size: 16px; */
+  color: #101010;
+}
+
+.stars-picker label:after {
+  content: '\f005';
+  font-family: fontAwesome;
+  display: block;
+  position: absolute;
+  font-size: 16px;
+  color: #1f9cff;
+  top: 0;
+  opacity: 0;
+  transition: .5s;
+  text-shadow: 0 2px 5px rgba(0,0,0,.5);
+}
+
+.stars-picker label:hover:after,
+.stars-picker label:hover ~ label:after,
+.stars-picker input:checked ~ label:after {
+  opacity: 1;
+}
+
+

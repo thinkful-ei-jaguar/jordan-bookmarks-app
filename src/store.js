@@ -1,13 +1,4 @@
-const bookmarks = [
-  {
-    id: 'x56w',
-    title: 'Title 1',
-    rating: 3,
-    url: 'http://www.title1.com',
-    description: 'lorem ipsum dolor sit',
-    expanded: true
-  },
-];
+const bookmarks = [];
 let adding = false;
 let error = null;
 let filter = 0;
@@ -22,8 +13,13 @@ const findById = function(id){
 
 const findAndUpdate = function(id, newData) {
   const currentItem = this.findById(id);
-  const newObject = Object.assign(currentItem, newData);
+  Object.assign(currentItem, newData);
 };
+
+const findAndDelete = function (id) {
+  this.bookmarks = this.bookmarks.filter(currentItem => currentItem.id !== id);
+};
+
 
 export default {
   bookmarks,
@@ -32,5 +28,7 @@ export default {
   filter,
   addItem,
   findById,
-  findAndUpdate
+  findAndUpdate,
+  findAndDelete,
+  filterItems
 };
