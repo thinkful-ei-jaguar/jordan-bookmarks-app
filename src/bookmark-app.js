@@ -112,7 +112,6 @@ const handleNewItemSave = function(){
     let newDescription = $('.description-input').val();
     let newRating =  $('input:radio[name=star]:checked').val();
 
-
     const newBookmarkEntry = {
       title : newTitle,
       url: newUrl,
@@ -123,7 +122,7 @@ const handleNewItemSave = function(){
     api.createItem(newBookmarkEntry)
       .then(res => res.json())
       .then((newItem) => {
-        store.addItem(newItem);
+        store.bookmarks.push(newItem);
         store.adding = false;
         render();
       });
@@ -164,6 +163,16 @@ $('main').on('click', '.delete-button', function(){
   });
 };
 
+//function will watch for filter selection to change
+const handleFilterSelection = function(){
+  $('main').on('change', '.filter-dropdown', function() {
+    console.log('handleFilterSelection is firing');
+    let currentFilter = $(event.target).val();
+    store.filterItems(currentFilter);
+  });
+  // render();
+};
+
 //this function will handle user clicking on the edit button
 const handleEditClick = function(){
 $().on('click', '', function(){
@@ -199,6 +208,7 @@ const eventListeners = function(){
   handleExistingItemClick();
   handleDeleteClick();
   handleEditClick();
+  handleFilterSelection();
 };
 
 export default {

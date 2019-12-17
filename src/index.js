@@ -9,15 +9,9 @@ import './index.css';
 import bookmarkApp from './bookmark-app.js';
 
 const main = function(){
-  api.getItems()
-    .then(res => res.json())
-    .then((items)=> {
-      items.forEach((item) => store.addItem(item));
-      bookmarkApp.render();
+  store.apiGetItems();
 
-    });
+  // bookmarkApp.render();
   bookmarkApp.eventListeners();
-  bookmarkApp.render();
-
 };
 $(main);

@@ -9,7 +9,8 @@ const BASE_URL = 'https://thinkful-list-api.herokuapp.com/jordan/bookmarks';
 
 //getItems will GET the api server state (api store) - WORKING!
 const getItems = function(){
-  return fetch(`${BASE_URL}`);
+  let fetchCall = fetch(`${BASE_URL}`);
+  return fetchCall;
 };
 
 //createItem will add a new bookmark - WORKING!!
