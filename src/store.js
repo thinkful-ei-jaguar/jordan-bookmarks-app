@@ -31,16 +31,16 @@ const apiGetItems =function(){
     });
 };
 
-const filterItems = function(minRating){
-  bookmarks = [];
-  apiGetItems();
-  filter = minRating;
-  console.log(filter);
-  console.log(bookmarks.length + 'xo');
-  bookmarks = this.bookmarks.filter(currentItem => currentItem.rating >= filter);
-  bookmarkApp.render();
-  
-};
+// const filterItems = function(minRating){
+//   // bookmarks = [];
+//   // apiGetItems();
+//   filter = Number(minRating);
+//   // console.log(filter);
+//   // console.log(bookmarks.length + 'xo');
+//   // bookmarks = bookmarks.filter(currentItem => currentItem.rating >= filter);
+//   console.log(filter, typeof filter)
+//   bookmarkApp.render(); 
+// };
 
 
 export default {
@@ -51,6 +51,6 @@ export default {
   findById,
   findAndUpdate,
   findAndDelete,
-  filterItems,
+  // filterItems,
   apiGetItems
 };

@@ -26,25 +26,28 @@ const generateModifyString = function(){
 
 //this function will generate the bookmark element
 const generateItemElement = function(bookmark){
-  if(!bookmark.expanded) { 
-    return `
-    <li class="bookmark-item-element" data-item-id="${bookmark.id}">
-      <div class="item-element">
-        <p class="title">${bookmark.title}</p>
-        <p class="rating">${bookmark.rating}</p>
-      </div>
-    </li>`;
-  } else {
-    return `
-    <li class="bookmark-item-element expanded" data-item-id="${bookmark.id}">
-      <div class="item-element">
-        <p class="title">${bookmark.title}</p>
-        <p class="url-visit"><a href="${bookmark.url}" target="_blank">Visit Site</a></p>
-        <p class="item-description">${bookmark.desc}</p>
-        <div class="rating-given">${bookmark.rating}</div>
-        <button type="button" class="delete-button">Delete Bookmark</button>
-      </div>
-    </li>`;
+  console.log(bookmark.rating, store.filter, bookmark.rating >= store.filter);
+  if(bookmark.rating >= store.filter){
+    if(!bookmark.expanded) { 
+      return `
+      <li class="bookmark-item-element" data-item-id="${bookmark.id}">
+        <div class="item-element">
+          <p class="title">${bookmark.title}</p>
+          <p class="rating">${bookmark.rating}</p>
+        </div>
+      </li>`;
+    } else {
+      return `
+      <li class="bookmark-item-element expanded" data-item-id="${bookmark.id}">
+        <div class="item-element">
+          <p class="title">${bookmark.title}</p>
+          <p class="url-visit"><a href="${bookmark.url}" target="_blank">Visit Site</a></p>
+          <p class="item-description">${bookmark.desc}</p>
+          <div class="rating-given">${bookmark.rating}</div>
+          <button type="button" class="delete-button">Delete Bookmark</button>
+        </div>
+      </li>`;
+    }
   }
 };
 
@@ -168,7 +171,9 @@ const handleFilterSelection = function(){
   $('main').on('change', '.filter-dropdown', function() {
     console.log('handleFilterSelection is firing');
     let currentFilter = $(event.target).val();
-    store.filterItems(currentFilter);
+    // store.filterItems(currentFilter);
+    store.filter = Number(currentFilter);
+    render();
   });
   // render();
 };
