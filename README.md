@@ -25,5 +25,4 @@ This app is for the Thinkful EI Bookmark App submission.
 
   I can select from a dropdown (a <select> element) a "minimum rating" to filter the list by all bookmarks rated at or above the chosen selection
 
-  I can edit the rating and description of a bookmark in my list
-    -> [this is almost completed. User can updated their bookmark and it updates the server state correctly. however, you have to refresh the page to see these updates applied.] 
+  I can edit the rating and description of a bookmark in my list 
