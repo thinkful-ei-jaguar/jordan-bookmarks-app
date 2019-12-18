@@ -1,13 +1,13 @@
 # jordan-bookmarks-app
 
-Overview: 
+# Overview: 
 Bookmark it. is an app for users to save their favorite bookmarks, with details such as: a title, url, description and rating. 
 
 This app is for the Thinkful EI Bookmark App submission.
 
-GH-Pages Link: 
+# GH-Pages Link: https://thinkful-ei-jaguar.github.io/jordan-bookmarks-app/
 
-User Stories completed: 
+# User Stories completed: 
 As a user I can - 
   I can add bookmarks to my bookmark list. Bookmarks contain: title, url link, description, rating (1-5)
 
