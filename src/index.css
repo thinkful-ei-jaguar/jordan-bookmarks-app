@@ -72,6 +72,30 @@ li {
   margin-bottom: 10px;
 }
 
+input{
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.edit-container .add-label{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+ 
+}
+
+.edit-container {
+  border: 2px solid grey;
+  width: 70%;
+  margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  margin-top: 30px;
+}
+
 .cancel-add {
   display: flex;
   flex-direction: row;
@@ -166,9 +190,37 @@ a {
 /* MEDIA QUERIES */
 /* FOR TABLETS */
 @media only screen and (min-width: 768px) {
-
+.bookmark-item-element {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .edit-container {
+    border: 2px solid grey;
+    width: 50%;
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+  }
 }
 /* FOR DESKTOP */
 @media only screen and (min-width: 992px and up) {
-
+  .bookmark-item-element {
+    width: 30%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .edit-container {
+    border: 2px solid grey;
+    width: 40%;
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+  }
 }

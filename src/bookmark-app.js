@@ -128,7 +128,7 @@ const generateEditForm = function(currentItem){
       <label for="star5">5</label>
   </div>
     <div class="cancel-add">
-      <button type="reset" class="cancel-button">Cancel</button>
+      <button type="reset" class="edit-cancel-button">Cancel</button>
       <button type="submit" class="edit-save-button">Save</button>
     </div>
   </form>
@@ -181,6 +181,13 @@ const handleNewItemSave = function(){
 const handleCancelFormClick = function(){
   $('main').on('click','.cancel-button', function (){
     store.adding = false;
+    render();
+  });
+};
+
+const handleEditCancel = function(){
+  $('main').on('click','.edit-cancel-button', function (){
+    store.editing = false;
     render();
   });
 };
@@ -246,7 +253,7 @@ const handleEditClick = function(){
 const handleEditSave = function(){
   $('main').on('submit', '.edit-bookmark', function(event){
     event.preventDefault();
-    
+    store.editing = false;
     let editId = store.editingId;
     let newTitle = $('.bookmark-title-input').val();
     let newUrl = $('.url-input').val();
@@ -264,7 +271,6 @@ const handleEditSave = function(){
       // .then(res => res.json())
       .then((updatedItem) => {
         store.findAndUpdate(editId, updatedItem);
-        store.editing = false;
         render();
       })
       .catch((error) => {
@@ -326,6 +332,7 @@ const eventListeners = function(){
   handleCancelFormClick();
   handleErrorClose();
   handleEditSave();
+  handleEditCancel();
 };
 
 export default {
