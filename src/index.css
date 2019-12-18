@@ -1,3 +1,226 @@
 * {
   font-family: 'Raleway', sans-serif;
+  box-sizing: border-box;
+}
+
+h1 {
+  width: 70%;
+  margin: auto;
+  margin-top: 5%;
+  text-align: center;
+  font-size: 50px;
+}
+
+.modify {
+  width: 70%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.add-new {
+  font-size: 16px;
+  padding: 15px;
+  background-color: white;
+  color: black;
+  border-radius: 30px;
+  border: 1px solid blue;
+}
+
+.filter {
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.filter-dropdown {
+  justify-content: space-around;
+  margin-top: 5%;
+  font-size: 14px;
+}
+
+.existing-bookmarks {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  list-style: none;
+  border: 2px solid grey;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.item-element {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.add-container .add-label{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+input{
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.edit-container .add-label{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+ 
+}
+
+.edit-container {
+  border: 2px solid grey;
+  width: 70%;
+  margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  margin-top: 30px;
+}
+
+.cancel-add {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cancel-add button {
+  font-size: 12px;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  border-radius: 30px;
+}
+
+.cancel-button {
+  border: 1px solid red;
+}
+
+.stars-picker > p {
+  margin-bottom: 0;
+
+}
+
+.stars-picker {
+  margin-bottom: 20px;
+}
+
+.save-button {
+  border: 1px solid green;
+  width: 50%;
+}
+
+li .expanded {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  
+}
+
+.title-url {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.title-url .title {
+  width: 50%;
+}
+
+.title-url .url-visit {
+  width: 50%;
+  text-align: right;
+}
+
+a {
+  text-decoration: none;
+}
+
+.item-description {
+  width: 50%;
+}
+
+.rating-given {
+  width: 50%;
+  text-align: right;
+  justify-self: center;
+  align-self: center;
+}
+
+.delete-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: white;
+  color: red;
+  border-radius: 10px;
+  border: 1px solid red;
+  font-size: 15px;
+  cursor: pointer;
+}
+.edit-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  border: 1px solid black;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* MEDIA QUERIES */
+/* FOR TABLETS */
+@media only screen and (min-width: 768px) {
+.bookmark-item-element {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .edit-container {
+    border: 2px solid grey;
+    width: 50%;
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+  }
+}
+/* FOR DESKTOP */
+@media only screen and (min-width: 992px and up) {
+  .bookmark-item-element {
+    width: 30%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .edit-container {
+    border: 2px solid grey;
+    width: 40%;
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+  }
 }
