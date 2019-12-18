@@ -1,4 +1,4 @@
-//import statements 
+import store from './store';
 
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/jordan/bookmarks';
 

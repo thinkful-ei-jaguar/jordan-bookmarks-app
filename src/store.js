@@ -4,7 +4,8 @@ let bookmarks = [];
 let adding = false;
 let error = null;
 let filter = 0;
-
+let editing = false;
+let editingId ;
 // const addItem = function(newItem){
 //   this.bookmarks.push(newItem);
 // };
@@ -53,6 +54,8 @@ export default {
   adding,
   error,
   filter,
+  editing,
+  editingId,
   findById,
   findAndUpdate,
   findAndDelete,
