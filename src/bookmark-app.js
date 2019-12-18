@@ -10,18 +10,22 @@ const generateModifyString = function(){
     <div class="filter-container">
       <label for="filter" class="filter"><span>Filter by <span class="fa fas fa-filter"></span></span>
         <select class="filter-dropdown" name="filter" id="filter">
-          <option value="5">5 Stars</option>
-          <option value="4">4 Stars</option>
-          <option value="3">3 Stars</option>
-          <option value="2">2 Stars</option>
-          <option value="1">1 Star</option>
+          <option disabled selected value>minimum rating</option>
+          <option value="5">5 Stars & up</option>
+          <option value="4">4 Stars & up</option>
+          <option value="3">3 Stars & up</option>
+          <option value="2">2 Stars & up</option>
+          <option value="1">1 Star & up</option>
         </select>
       </label>
     </div>
   </section>
   <ul class="item-view existing-bookmarks">
-  </ul>
   `;
+};
+
+const generateUl = function(){
+  return `</ul>`;
 };
 
 //this function will generate the bookmark element
@@ -38,7 +42,7 @@ const generateItemElement = function(bookmark){
       </li>`;
     } else {
       return `
-      <li class="bookmark-item-element " data-item-id="${bookmark.id}">
+      <li class="bookmark-item-element expanded" data-item-id="${bookmark.id}">
         <div class="item-element expanded">
           <div class="title-url">
           <p class="title">${bookmark.title}</p>
@@ -47,7 +51,7 @@ const generateItemElement = function(bookmark){
           <p class="item-description"><strong>Description:</strong><br> ${bookmark.desc}</p>
           <div class="rating-given"><strong>Rated:</strong><br>${bookmark.rating} <span class="fa fas fa-star"></span></div>
           <button type="button" class="delete-button"><i class="fa fas fa-trash"></i></button>
-          <button class="edit-button"> <span class="fa fas fa-pen"></span> Edit</button>
+          <button class="edit-button" ria-label="Delete"> <span class="fa fas fa-pen"></span> Edit</button>
         </div>
       </li>`;
     }
@@ -58,23 +62,24 @@ const generateItemElement = function(bookmark){
 const generateItemString = function(bookmarkList){
   const bookmarks = bookmarkList.map((item) => generateItemElement(item));
   const modifySection = generateModifyString();
-  return modifySection + bookmarks.join('');
+  const endingUl = generateUl();
+  return modifySection + bookmarks.join('') + endingUl;
 };
 
 //this function will generate the form to add a new bookmark after clicking on the add new button 
 const generateAddForm = function(){
   let addingForm =  `
   <section class="add-container">
-  <form class="add-new-bookmark">
+  <form class="add-new-bookmark" method="post">
     <h2>Create new bookmark:</h2>
     <label for="bookmark-title" class="add-label">Title
-      <input type="text" id="bookmark-title" name="title" class="bookmark-title-input" required>
+      <input type="text" id="bookmark-title" name="title" class="bookmark-title-input" placeholder="Notion.so" required>
     </label>
     <label for="url" class="add-label">Url
-      <input type="url" id="url" name="url" class="url-input" required>
+      <input type="url" id="url" name="url" class="url-input" placeholder="https://www.notion.so/" required>
     </label>
     <label for="description" class="add-label">Bookmark Description
-      <input type="text" id="description" name="description" class="description-input" required>
+      <input type="text" id="description" name="description" class="description-input" placeholder="My favorite note taking app" required>
     </label>
     <div class="stars-picker">
       <p>Rate this bookmark: </p>
@@ -86,7 +91,7 @@ const generateAddForm = function(){
       <label for="star3">3</label>
       <input name="star" id="star4" type="radio" value="4"></input>
       <label for="star4">4</label>
-      <input name="star" id="star5" type="radio" value="5"></input>
+      <input name="star" id="star5" type="radio" value="5" checked></input>
       <label for="star5">5</label>
   </div>
     <div class="cancel-add">

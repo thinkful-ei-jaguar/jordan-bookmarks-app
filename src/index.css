@@ -1,6 +1,18 @@
 * {
   font-family: 'Raleway', sans-serif;
   box-sizing: border-box;
+  
+  
+}
+
+body {
+  /* background-color: #BBC7CE; */
+  background-color: #4C5760;
+  color: white;
+}
+
+button{
+  outline: none;
 }
 
 h1 {
@@ -8,7 +20,8 @@ h1 {
   margin: auto;
   margin-top: 5%;
   text-align: center;
-  font-size: 50px;
+  font-size: 70px;
+  text-shadow: 2px 2px black;
 }
 
 .modify {
@@ -27,7 +40,19 @@ h1 {
   background-color: white;
   color: black;
   border-radius: 30px;
-  border: 1px solid blue;
+  border: 3px solid #736372;
+}
+
+
+.fa-plus{
+  color: #736372;
+}
+
+.add-new:hover {
+  color: #736372;
+  cursor: pointer;
+  border-color: #736372;
+  box-shadow: 2px 8px 8px 3px rgba(0,0,0,0.55);
 }
 
 .filter {
@@ -44,18 +69,27 @@ h1 {
   font-size: 14px;
 }
 
-.existing-bookmarks {
+/* .existing-bookmarks {
   width: 70%;
   margin: auto;
   display: flex;
   flex-direction: column;
-}
+} */
 
 li {
   list-style: none;
   border: 2px solid grey;
   padding-left: 20px;
   padding-right: 20px;
+  /* transition: height 2s; */
+  /* transform: scaleY(0);
+  height: auto; */
+  flex: 0;
+  border: 2px solid white;
+}
+
+li:hover{
+  box-shadow: 2px 8px 8px 3px rgba(0,0,0,0.55);
 }
 
 .item-element {
@@ -63,7 +97,12 @@ li {
   flex-direction: row;
   display: flex;
   justify-content: space-between;
+  flex: 0;
+}
 
+.title:hover{
+  color: #BFACB5;
+  cursor: pointer;
 }
 
 .add-container .add-label{
@@ -132,7 +171,12 @@ li .expanded {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  
+  /* height: auto;
+  transform: scaleY(1);
+  transition: transform 3s; */
+  flex: 1;
+  transition: flex 10s;
+
 }
 
 .title-url {
@@ -142,15 +186,25 @@ li .expanded {
 }
 .title-url .title {
   width: 50%;
+  font-size: larger;
 }
 
 .title-url .url-visit {
   width: 50%;
   text-align: right;
+  color: white;
 }
 
 a {
   text-decoration: none;
+  color: white;
+
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #8895B3;
+
 }
 
 .item-description {
