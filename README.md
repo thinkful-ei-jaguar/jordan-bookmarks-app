@@ -8,7 +8,7 @@ This app is for the Thinkful EI Bookmark App submission.
 # GH-Pages Link: https://thinkful-ei-jaguar.github.io/jordan-bookmarks-app/
 
 # User Stories completed: 
-As a user I can - 
+
   I can add bookmarks to my bookmark list. Bookmarks contain: title, url link, description, rating (1-5)
 
   I can see a list of my bookmarks when I first open the app
@@ -26,4 +26,4 @@ As a user I can -
   I can select from a dropdown (a <select> element) a "minimum rating" to filter the list by all bookmarks rated at or above the chosen selection
 
   I can edit the rating and description of a bookmark in my list
-    - this is almost completed. User can updated their bookmark and it updates the server state correctly. however, you have to refresh the page to see these updates applied. 
+    -> [this is almost completed. User can updated their bookmark and it updates the server state correctly. however, you have to refresh the page to see these updates applied.] 
